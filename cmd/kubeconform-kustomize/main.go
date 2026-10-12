@@ -122,7 +122,7 @@ func run(args []string, lookup lookupFunc, command runFunc, stdout, stderr io.Wr
 	for _, overlay := range overlays {
 		var rendered bytes.Buffer
 
-		if err := command(kustomize, []string{"build", overlay}, nil, &rendered, stderr); err != nil {
+		if err := command(kustomize, []string{"build", "--enable-helm", overlay}, nil, &rendered, stderr); err != nil {
 			_, _ = fmt.Fprintf(stderr, "kubeconform-kustomize: %s: kustomize build failed: %s\n", overlay, err)
 
 			failed = true
